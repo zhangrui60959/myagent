@@ -63,7 +63,13 @@ cd /d "%INSTALL_DIR%\hub"
 %PYTHON% -m venv venv
 call venv\Scripts\activate.bat
 pip install --upgrade pip -q
-pip install -r requirements.txt -q
+
+echo [INFO] 尝试安装 (优先使用预编译包)...
+pip install -r requirements.txt --only-binary :all: -q
+if %errorlevel% neq 0 (
+    echo [INFO] 预编译包不足，尝试完整安装 (可能需要编译)...
+    pip install -r requirements.txt -q
+)
 deactivate
 
 echo.
