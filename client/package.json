@@ -1,0 +1,36 @@
+{
+  "name": "myagent-client",
+  "version": "1.0.0",
+  "description": "MyAgent Electron 客户端",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.myagent.app",
+    "productName": "MyAgent",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": ["dmg", "zip"]
+    },
+    "win": {
+      "target": ["nsis", "portable"]
+    },
+    "linux": {
+      "target": ["AppImage", "deb"]
+    }
+  },
+  "dependencies": {
+    "electron": "^28.0.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.9.1"
+  }
+}
