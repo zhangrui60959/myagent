@@ -8,8 +8,8 @@ const WebSocket = require('ws');
 const http = require('http');
 
 // ============== 配置 ==============
-const HUB_HOST = process.env.HUB_HOST || 'localhost';
-const HUB_PORT = process.env.HUB_PORT || '8080';
+const HUB_HOST = process.env.HUB_HOST || '127.0.0.1';
+const HUB_PORT = process.env.HUB_PORT || '8765';
 const WS_PORT = process.env.WS_PORT || '8765';
 
 // ============== 全局变量 ==============
@@ -136,7 +136,8 @@ function createTray() {
 
 // ============== WebSocket 连接 ==============
 function connectToHub() {
-  const url = `ws://${HUB_HOST}:${WS_PORT}`;
+  const clientId = `electron-${Date.now()}`;
+  const url = `ws://${HUB_HOST}:${WS_PORT}/ws/${clientId}`;
   console.log(`[WS] 正在连接: ${url}`);
 
   ws = new WebSocket(url);
